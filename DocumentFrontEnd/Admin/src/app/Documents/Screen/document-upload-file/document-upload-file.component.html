@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <p class="p-3 mb-0">
+    <form [formGroup]="frmdata" (ngSubmit)="SaveAttachment()">
+        <div class="card border border-primary">
+           
+            <div class="card-body">
+                <div class="row">
+                    <div class="card-header bg-transparent border-primary" style="text-align: start;">
+                        <h5 class="my-0 text-primary"   ><i class="mdi mdi-bullseye-arrow mr-3"></i>
+                          Document</h5>
+                    </div>
+                    <div class="button-items" style="text-align: end;">
+                      <button type="button" [disabled]="!frmdata.valid" (click)="SaveAttachment()"
+                        class="btn btn-sm btn-success"> <i class="fas fa-save"></i>  Save</button>
+                      <button type="button" (click)="this.Cleardata()" class="btn btn-sm btn-danger"   > <i
+                          class="fas fa-times"></i>  cancel</button>
+          
+                    </div>
+                  </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name">name <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="name" formControlName="Name"
+                                [class.is-invalid]="frmdata.get('Name').invalid  
+                                    && (frmdata.get('Name').dirty || frmdata.get('Name').touched)" />
+                            <div class="invalid-feedback">
+                                <span  >  RequiredFiled</span>
+    
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Date"  >Date <span style="color: red;">*</span></label>
+                            <input type="date" class="form-control" id="Date" formControlName="Date"
+                                [class.is-invalid]=" frmdata.get('Date').invalid  && (frmdata.get('Date').dirty ||  frmdata.get('Date').touched)" />
+                            <div class="invalid-feedback"  >
+                                <span  >RequiredFiled</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Due_date"  >Due_date <span style="color: red;">*</span></label>
+                            <input type="date" class="form-control" id="Date" formControlName="Due_date"
+                                [class.is-invalid]=" frmdata.get('Due_date').invalid  && ( frmdata.get('Due_date').dirty ||  frmdata.get('Due_date').touched)" />
+                            <div class="invalid-feedback"  >
+                                <span  >RequiredFiled</span>
+                            </div>
+                        </div>
+                        </div> 
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="PriorityId"  >PriorityId <span
+                                        style="color: red;">*</span></label>
+                                <ng-select id="PriorityId" formControlName="PriorityId" name="PriorityId"
+                                    #ngSelect
+                                    [class.is-invalid]="frmdata.get('PriorityId').invalid  
+                                    && (frmdata.get('PriorityId').dirty || frmdata.get('PriorityId').touched)">
+                                    <ng-option value="0">
+                                        Select ...
+                                    </ng-option>
+                                    <ng-option [value]="item.id" *ngFor="let item of this.Priority">
+                                        {{item.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="invalid-feedback"  >
+                                    <span  >  RequiredFiled</span>
+    
+                                </div>
+                            </div>
+                        <div class="mb-3">
+                                <label for="Created"  >Created <span style="color: red;">*</span></label>
+                                <input type="date" class="form-control" id="Created" formControlName="Created"
+                                    [class.is-invalid]="frmdata.get('Created').invalid  && ( frmdata.get('Created').dirty ||  frmdata.get('Created').touched)" />
+                                <div class="invalid-feedback"  >
+                                    <span  >RequiredFiled</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="FilePath" translate>File </label>
+                                <input type="file" multiple class="form-control" id="FilePath"
+                                    (change)="onFileChange($event)" #inputFile >
+                                 <div *ngFor="let item of document_files"><a [href]="item.file_path">{{item.documentFileName}}</a></div>
+                                
+                            </div>
+                        </div>
+                        </div>
+             
+            </div>
+        </div>
+    </form>
+</div>
